@@ -38,7 +38,15 @@ public LoginClass(String username, String password, String phoneNumber,
 
 /*method to check password complexity rules with regex:
     password should be at least 8 char long, have a capital letter, a number and a special character
-*/  
+----------
+Validates a special character
+Regex adapted from:
+How to check if a string contains special characters in Java
+
+LabEx. (n.d.). How to check if a string contains special characters in Java. LabEx. [Online]. 
+Available at: <https://labex.io/tutorials/java-how-to-check-if-a-string-contains-special-characters-in-java-559981> [Accessed 13 September 2026].
+*/    
+    
     public boolean checkPasswordComplexity (String password) {
 //rejects null password
         if (password == null) {
@@ -51,6 +59,7 @@ public LoginClass(String username, String password, String phoneNumber,
         }
        
        //use regex to ensure capital letter, number and special character
+       
        boolean hasCapital = password.matches(".*[A-Z].*"); // password has at least one capital letter
        boolean hasNumber = password.matches(".*[0-9].*"); // password contains at least one number
        boolean hasSpecialChar = password.matches (".*[^a-zA-Z0-9\\s].*"); // password contains at least one special character (not a letter, digit or whitespace)
@@ -61,7 +70,22 @@ public LoginClass(String username, String password, String phoneNumber,
 
 /*method to check phone number with regex:
    it should have the international country code and number
-*/
+ ----------------------
+  Regex pattern adapted from a GeeksforGeeks tutorial on international
+  phone number validation. The original pattern was simplified to accept only the South African international code (+27) followed by 9 or 10 digits
+ 
+ Source:
+ GeeksforGeeks. (2025). Validate Phone Numbers (with Country Code extension) using Regular Expression. [Online]. Available at:
+  <https://www.geeksforgeeks.org/dsa/validate-phone-numbers-with-country-code-extension-using-regular-expression/>[Accessed 13 September 2026].
+ 
+ */
+public boolean checkCellPhoneNumber(String phoneNumber) {
+    if (phoneNumber == null || phoneNumber.isEmpty()) {
+        return false;
+    }
+    return phoneNumber.matches("^\\+27\\d{9,10}$");
+}
+
     public boolean checkPhoneNumber(String phoneNumber) {
         
        return phoneNumber != null && phoneNumber.matches("^\\+27\\d{9}$") ; //this ensures it has RSA's +27 code and 9 numbers that follow

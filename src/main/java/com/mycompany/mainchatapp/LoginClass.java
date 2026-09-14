@@ -16,9 +16,7 @@ public class LoginClass {
     private String firstName;
     private String lastName;    
 
- // default constructor
-   // public LoginClass() {
-    //}   
+  
  
 //creating a constructor with parameters
 public LoginClass(String username, String password, String phoneNumber, String firstName, String lastName) {

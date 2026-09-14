@@ -12,10 +12,24 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Student
  */
 public class LoginClassTest {
-    
-    public LoginClassTest() {
-        
-    }
+  LoginClass obj = new LoginClass();
+  
+@Test
+public void testCheckUserNameValid() {
+    String username = "kyl_1";
+    boolean expected = true;
+    boolean results = obj.checkUserName(username);
 
+ assertTrue(results);
+}
+ 
+@Test
+public void testCheckUserNameInvalidNoUnderscore() {
+    String username = "kyle!!!!!!!";
+    boolean expected = false;
+    boolean results = obj.checkUserName(username);
     
+  assertFalse(results);
+}
+
 }

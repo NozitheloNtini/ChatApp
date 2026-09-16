@@ -56,16 +56,29 @@ public class MainChatApp {
         if (!validation.checkPhoneNumber(phoneNumber)){
             System.out.println("Cell phone number incorrectly formatted or does not contain international code."); 
         return;
-        }System.out.println("Cell phone number successfully added.");
-        
-        
-        LoginClass login = new LoginClass(username, password, phoneNumber, firstName, lastName);
-        System.out.println(login.registerUser());
+        }System.out.println("Cell phone number successfully added."); 
 
      //calling registration method
+        LoginClass login = new LoginClass(username, password, phoneNumber, firstName, lastName);
+        System.out.println(login.registerUser());
+   
+     //user login menu
+    login.loginUser(username, password);
+        System.out.println("");
+        System.out.println("---Login to continue---");
+        
+        System.out.println("Enter your username:");
+        String loginUsername =  obj.nextLine();
+        
+        System.out.println("Enter your password:");
+        String loginPassword =  obj.nextLine();
     
-    login.loginUser(username, password);//calling login verification module
-    
+        isLoggedIn = login.loginUser(loginUsername, loginPassword);
+        
+        System.out.println("You have logged in successfully.");
+        System.out.println("");
+        
+    //succesful login message
     if (isLoggedIn) {
         System.out.println("---Welcome to QuickChat!---");
         //this is where menu of options will be added later

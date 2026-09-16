@@ -108,5 +108,146 @@ public class LoginClassTest {
         boolean result = instance.checkPhoneNumber(phoneNumber);
         assertEquals(expResult, result);
     }
+    
+    /**
+     * Valid Test of registerUser method, of class LoginClass.
+    */
 
+    @Test
+    public void checkRegisterUserValid() {
+        System.out.println("checkRegisterUserValid");
+        
+        LoginClass instance = new LoginClass("kyl_1", "Ch&&sec@ke99!", "+27838968976", "Kyle", "Smith");
+        
+        String result = instance.registerUser();
+        String expResult = "User registered successfully";
+        
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Invalid Username Test of registerUser method, of class LoginClass.
+    */
+
+    @Test
+    public void checkRegisterUserInvalidUsername() {
+        System.out.println("checkRegisterUserInvalidUsername");
+        
+        LoginClass instance = new LoginClass("kyle!!!!!!!", "Password_1", "+27838968976", "Kyle", "Smith");
+        
+        String result = instance.registerUser();
+        String expResult = "Username is not correctly formatted, please ensure that your username contains an underscore and is no more than five characters in length";
+        
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Invalid Password Test of registerUser method, of class LoginClass.
+    */
+    @Test
+    public void checkRegisterUserInvalidPassword() {
+        System.out.println("checkRegisterUserInvalidPassword");
+        
+        LoginClass instance = new LoginClass("kyl_1", "password", "+27838968976", "Kyle", "Smith");
+        
+        String result = instance.registerUser();
+        String expResult = "Password is not correctly formatted. Please ensure that the password contains at least eight characters, a capital letter, a number and a special character";
+
+        
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Invalid Phone Number Test of registerUser method, of class LoginClass.
+    */
+    @Test
+    public void checkRegisterUserInvalidPhoneNumber() {
+        System.out.println("checkRegisterUserInvalidPhoneNumber");
+        
+        LoginClass instance = new LoginClass("kyl_1", "Ch&&sec@ke99!", "08966553", "Kyle", "Smith");
+        
+        String result = instance.registerUser();
+        String expResult = "Cell phone number incorrectly formatted or does not contain international code";
+
+        
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Valid Test of loginUser method, of class LoginClass.
+     */
+    @Test
+    public void testLoginUserValid() {
+        System.out.println("loginUser");
+        String username = "kyl_1";
+        String password = "Ch&&sec@ke99!";
+        LoginClass instance = new LoginClass("kyl_1", "Ch&&sec@ke99!", "+27838968976", "Kyle", "Smith");
+        boolean expResult = true;
+        boolean result = instance.loginUser(username, password);
+        assertEquals(expResult, result);
+        
+    }
+    
+    /**
+     * Invalid Username Test of loginUser method, of class LoginClass.
+     */
+    @Test
+    public void testLoginUserInvalidUsername() {
+        System.out.println("loginUser");
+        String username = "kyle!!!!!!!";
+        String password = "Ch&&sec@ke99!";
+        LoginClass instance = new LoginClass("kyle!!!!!!!", "Ch&&sec@ke99!", "+27838968976", "Kyle", "Smith");
+        boolean expResult = true;
+        boolean result = instance.loginUser(username, password);
+        assertEquals(expResult, result);
+        
+    }
+
+    /**
+     * Invalid Password Test of loginUser method, of class LoginClass.
+     */
+    @Test
+    public void testLoginUserInvalidPassword() {
+        System.out.println("loginUser");
+        String username = "kyl_1";
+        String password = "password";
+        LoginClass instance = new LoginClass("kyl_1", "password", "+27838968976", "Kyle", "Smith");
+        boolean expResult = true;
+        boolean result = instance.loginUser(username, password);
+        assertEquals(expResult, result);
+        
+    }
+    
+    /**
+     * Valid Test of returnLoginStatus method, of class LoginClass.
+     */
+    @Test
+    public void testReturnLoginStatusValid() {
+       
+        System.out.println("returnLoginStatusValid");
+        boolean isLoggedIn = true;
+        LoginClass instance = new LoginClass("kyl_1", "Ch&&sec@ke99!", "+27838968976", "Kyle", "Smith");
+        String expResult = "Welcome Kyle, Smith it is great to see you again.";        String result = instance.returnLoginStatus(isLoggedIn);
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Invalid Test of returnLoginStatus method, of class LoginClass.
+     */
+    @Test
+    public void testReturnLoginStatusInvalid() {
+        
+      
+        System.out.println("returnLoginStatusInvalid");
+        boolean isLoggedIn = false;
+        LoginClass instance = new LoginClass("kyl_1", "password", "+27838968976", "Kyle", "Smith");
+        String expResult = "Username or password incorrect, please try again";
+        String result = instance.returnLoginStatus(isLoggedIn);
+        assertEquals(expResult, result);
+    }
 }
+    
+    
+    
+    
+    

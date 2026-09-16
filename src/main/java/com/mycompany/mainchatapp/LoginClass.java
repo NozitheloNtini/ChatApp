@@ -80,12 +80,6 @@ Available at: <https://labex.io/tutorials/java-how-to-check-if-a-string-contains
   <https://www.geeksforgeeks.org/dsa/validate-phone-numbers-with-country-code-extension-using-regular-expression/>[Accessed 13 September 2026].
  
  */
-public boolean checkCellPhoneNumber(String phoneNumber) {
-    if (phoneNumber == null || phoneNumber.isEmpty()) {
-        return false;
-    }
-    return phoneNumber.matches("^\\+27\\d{9,10}$");
-}
 
     public boolean checkPhoneNumber(String phoneNumber) {
         

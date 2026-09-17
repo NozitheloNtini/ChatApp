@@ -17,7 +17,7 @@ public class MainChatApp {
       boolean isLoggedIn = false;
       LoginClass validation = new LoginClass("", "", "", "", ""); //used to validate methods 
        
-    //creating instance of LoginClass
+    //Registration
     
         System.out.println("----Welcome to QuickChat Registration.----");
         
@@ -29,7 +29,7 @@ public class MainChatApp {
         String lastName = obj.nextLine();
         
         //validate username
-        System.out.println("What is your username?");
+        System.out.println("Choose a username (must contain '_', max 5 characters):");
         String username = obj.nextLine();
         
         if (!validation.checkUserName(username)) {
@@ -38,9 +38,10 @@ public class MainChatApp {
         return; //exits program if username is wrong
         
         } System.out.println("Username successfully captured.");
-        
+          System.out.println();
+
         //validate password
-        System.out.println("What is your password?");
+        System.out.println("Choose a password (min 8 chars, 1 capital, 1 number, 1 special char):");
         String password = obj.nextLine();
         
         if (!validation.checkPasswordComplexity(password)){
@@ -48,9 +49,10 @@ public class MainChatApp {
                     + "contains at least eight characters, a capital letter, a number and a special character.");
         return;
         } System.out.println("Password successfully captured.");
-        
+          System.out.println();
+
         //validate phone number
-        System.out.println("What is your cell phone number? (e.g, +27123456789");
+        System.out.println("Enter cell number (with international code, e.g. +27838968976):");
         String phoneNumber = obj.nextLine();
         
         if (!validation.checkPhoneNumber(phoneNumber)){
@@ -75,15 +77,17 @@ public class MainChatApp {
     
         isLoggedIn = login.loginUser(loginUsername, loginPassword);
         
-        System.out.println("You have logged in successfully.");
-        System.out.println("");
+        System.out.println();
+        System.out.println(login.returnLoginStatus(isLoggedIn)); //prints welcome message with their name and surname
+        System.out.println();
         
-    //succesful login message
+    
     if (isLoggedIn) {
         System.out.println("---Welcome to QuickChat!---");
+        
         //this is where menu of options will be added later
+            
     }
-    
     
     }
 }

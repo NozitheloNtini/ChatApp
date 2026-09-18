@@ -65,7 +65,6 @@ public class MainChatApp {
         System.out.println(login.registerUser());
    
      //user login menu
-    login.loginUser(username, password);
         System.out.println("");
         System.out.println("---Login to continue---");
         
@@ -82,8 +81,10 @@ public class MainChatApp {
         System.out.println();
         
     
-    if (isLoggedIn) {
-        System.out.println("---Welcome to QuickChat!---");
+    if (!isLoggedIn) {
+        return; //stop the app if login failed
+    }
+        System.out.println("---Welcome to QuickChat!---"); //print only if logged in successfully
         
         //this is where menu of options will be added later
             

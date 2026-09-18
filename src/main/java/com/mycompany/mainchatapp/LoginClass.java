@@ -103,11 +103,11 @@ Available at: <https://labex.io/tutorials/java-how-to-check-if-a-string-contains
       }
       
       if (isPasswordValid == false) {
-          return "Password is not correctly formatted. Please ensure that the password contains at least eight characters, a capital letter, a number and a special character.";
+          return "Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.";
       }
       
       if (isCellPhoneValid == false) {
-          return "Cell phone number incorrectly formatted or does not contain international code.";   
+          return "Cell number is incorrectly formatted or does not contain an international code; please correct the number and try again.";   
       }
       
       return "User registered successfully.";

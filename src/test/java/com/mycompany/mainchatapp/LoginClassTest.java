@@ -155,7 +155,7 @@ public class LoginClassTest {
         LoginClass instance = new LoginClass("kyl_1", "password", "+27838968976", "Kyle", "Smith");
         
         String result = instance.registerUser();
-        String expResult = "Password is not correctly formatted. Please ensure that the password contains at least eight characters, a capital letter, a number and a special character.";
+        String expResult = "Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.";
 
         
          assertTrue(expResult.equals(result));
@@ -172,7 +172,7 @@ public class LoginClassTest {
         LoginClass instance = new LoginClass("kyl_1", "Ch&&sec@ke99!", "08966553", "Kyle", "Smith");
         
         String result = instance.registerUser();
-        String expResult = "Cell phone number incorrectly formatted or does not contain international code.";
+        String expResult = "Cell number is incorrectly formatted or does not contain an international code; please correct the number and try again.";
 
         
          assertTrue(expResult.equals(result));

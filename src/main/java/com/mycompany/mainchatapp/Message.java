@@ -49,7 +49,7 @@ public class Message {
         this.messageNumber = totalMessages;
         this.recipient = recipient;
         this.messageText = messageText;
-        this.messageHash = CreateMessageHash();
+        this.messageHash = createMessageHash();
         this.messageStatus = ""; //has no status yet because the user hasnt chosen what to do with the message yet
     }
         
@@ -62,5 +62,48 @@ public class Message {
                 id = id + rndm.nextInt(10); // add a random number 0-9 at the end of the ID string
             
     } return id;
+    }
+    
+    //validation methods:
+    
+    //method to ensure message id is not more than 10 characters
+    public boolean checkMessageID() {
+        if (messageID == null) {
+            return false;
+    }
+    return messageID.length() <= 10;
+}
+    
+    //method to check cell number
+    public String checkRecipientCell() {
+        if (recipient != null && recipient.matches("^\\+27\\d{9}$")) {
+            return "Cell phone number successfully captured.";
+        }
+        return "Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.";
+    }
+    
+    //method to ensure message lenth is not more than 250 characters
+    public static String checkMessageLength(String msg){
+        if (msg.length()<= 250) {
+            return "Message ready to send.";
+            
+        } return "Message exceeds 250 characters by " + (msg.length() - 250) +"please reduce the size.";
+    }
+    
+    //creating a method hash (first 2 numbers of ID:message number:FIRSTWORD+LASTWORD)
+    
+    /*
+    String manipulation: trim, split and replaceAll adapted from Oracle
+    Source:
+    Oracle. (2022). Java Platform, Standard Edition Java API Reference. [online] Available at: <https://docs.oracle.com/javase/jp/18/docs/api/java.base/java/lang/String.html> [Accessed 14 October 2026].
+    */
+    public String createMessageHash() {
+        String firstTwo = messageID.substring(0, 2); //first 2 indexes (0 and 1)
+
+        String [] words = messageText.trim().split("\\s+"); // Trim leading/trailing whitespace, then split the message into words so consecutive spaces don't produce empty entries
+        String firstWord = words[0].replaceAll("[^a-zA-Z]",""); //Takes the first word and remove every character that is NOT a letter (a-z, A-Z)
+        String lastWord = words [words.length-1].replaceAll("[^a-zA-Z]", ""); // Take the last word and remove every character that is NOT a letter
+                                                                               
+    return (firstTwo + ":" + messageNumber + ":" + firstWord + lastWord).toUpperCase();
     }
 }

@@ -9,5 +9,11 @@ package com.mycompany.mainchatapp;
  * @author Student
  */
 public class Message {
+    //variables
+    private String messageID;
+    private int messageNumber;
+    private String recipient;
+    private String messageText;
+    private String messageHash;
     
 }

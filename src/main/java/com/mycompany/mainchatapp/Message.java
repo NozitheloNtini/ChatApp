@@ -32,6 +32,14 @@ public class Message {
     private static int storedMsgsCount = 0; //how many stored
     private static int disregardedMsgsCount = 0; // how many disregarded
     
+    //setup arrays with the given size
+    public static void setupArrays(int size) {
+        sentMessages = new String[size];
+        storedMessages = new String[size];
+        disregardedMessages = new String[size];
+        messageHashes = new String[size];
+        messageIDs = new String[size];
+    }
     
     
 }

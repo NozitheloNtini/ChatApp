@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.mainchatapp;
+import java.util.Random;
 
 /**
  *
@@ -17,7 +18,7 @@ public class Message {
     private String messageHash;
     private String messageStatus; //this will flags/alerts if message is sent, stored or disregarded
     
-    //creating a static field because they shared across all Message objects
+    //creating a static field because they shared across all Message objects. it tracks how many messages are created
     private static int totalMessages =0;
     
     //declaring arrays
@@ -41,5 +42,25 @@ public class Message {
         messageIDs = new String[size];
     }
     
-    
+    //constructor to build a message and assign it a number
+    public Message(String recipient, String messageText) {
+        this.messageID = generateMessageID();
+        totalMessages = totalMessages + 1; //increments the shared counter, then assigns
+        this.messageNumber = totalMessages;
+        this.recipient = recipient;
+        this.messageText = messageText;
+        this.messageHash = CreateMessageHash();
+        this.messageStatus = ""; //has no status yet because the user hasnt chosen what to do with the message yet
+    }
+        
+    //generating a random message ID
+    private String generateMessageID(){
+  
+        Random rndm = new Random();
+        String id = "";
+            for (int i=0; i <10; i++){ //loops 10 times
+                id = id + rndm.nextInt(10); // add a random number 0-9 at the end of the ID string
+            
+    } return id;
+    }
 }

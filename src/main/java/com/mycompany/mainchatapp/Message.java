@@ -21,7 +21,6 @@ public class Message {
     private static int totalMessages =0;
     
     //declaring arrays
-    
     private static String[] sentMessages;
     private static String[] storedMessages;
     private static String[] disregardedMessages;
@@ -32,5 +31,7 @@ public class Message {
     private static int sentMsgsCount = 0; // how many messages are sent for far?
     private static int storedMsgsCount = 0; //how many stored
     private static int disregardedMsgsCount = 0; // how many disregarded
+    
+    
     
 }

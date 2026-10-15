@@ -131,4 +131,38 @@ public void storeMessage() {
             System.out.println("Error storing message: " + e.getMessage());
         }
     }
+
+// handles the user's choice: send, store or disregard the message
+public String sentMessage(int option) {
+    //option 1 send message
+    if (option == 1) {
+        messageStatus = "Sent";
+        sentMessages[sentMsgsCount]=messageText;
+        messageHashes[sentMsgsCount]= messageHash;
+        messageIDs[sentMsgsCount]= messageID;
+        sentMsgsCount = sentMsgsCount +1; // moves the counter forward so the next send goes to the next slot
+    return "Message sent";       
+    }
+    
+    //option 2 store message and save to json
+    if (option ==2) {
+        messageStatus = "Stored";
+        storedMessages[storedMsgsCount]=messageText;
+        messageHashes[storedMsgsCount]= messageHash;
+        messageIDs[storedMsgsCount]= messageID;
+        storedMsgsCount = storedMsgsCount +1; 
+        storeMessage();
+    return "Message stored";       
+    }
+    
+    //option 3 disregard the message
+    if (option == 3) {
+        messageStatus = "Disregarded";
+        disregardedMessages[disregardedMsgsCount]= messageText;
+        disregardedMsgsCount = disregardedMsgsCount +1;
+    return "Message disregarded";       
+}
+     //any other option is invalid
+    return "Invalid Option.";
+}
 }

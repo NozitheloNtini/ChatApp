@@ -106,4 +106,29 @@ public class Message {
                                                                                
     return (firstTwo + ":" + messageNumber + ":" + firstWord + lastWord).toUpperCase();
     }
+
+//storing messeage to JSON file
+/*File writer approach referenced from:
+Oracle. (2024). FileWriter (Java Platform SE 8). [Online] Available at: <https://docs.oracle.com/javase/8/docs/api/java/io/FileWriter.html> [Accessed 15 October 2026].
+*/
+
+public void storeMessage() {
+
+        // build the JSON text as a single string
+        String json = "{\n"
+                + "  \"messageID\": \"" + messageID + "\",\n" // messageID field
+                + "  \"messageNumber\": " + messageNumber + ",\n" // messageNumber field
+                + "  \"recipient\": \"" + recipient + "\",\n" //recipient field
+                + "  \"message\": \"" + messageText + "\",\n" // message text field
+                + "  \"messageHash\": \"" + messageHash + "\",\n" // messageHash field
+                + "  \"status\": \"" + messageStatus + "\"\n" //status field
+                + "}\n";
+
+        
+        try (java.io.FileWriter writer = new java.io.FileWriter("messages.json", true)) {
+            writer.write(json);
+        } catch (java.io.IOException e) {
+            System.out.println("Error storing message: " + e.getMessage());
+        }
+    }
 }

@@ -136,13 +136,18 @@ public String sentMessage(int option) {
     return "Invalid Option.";
 }
 
-//rreturns one message's full details
+//returns one message's full details
 public String printMessages() {
     return "Message ID: " + messageID + "\n"
             + "Message Hash: " + messageHash + "\n"
             + "Recipient: " + recipient + "\n"
             + "Message: " + messageText + "\n"
             ;
+}
+
+//total messages
+public static int returnTotalMessages(){
+    return totalMessages;
 }
 
 }

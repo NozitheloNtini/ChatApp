@@ -40,8 +40,9 @@ public class Message {
             for (int i=0; i <10; i++){ //loops 10 times
                 id = id + rndm.nextInt(10); // add a random number 0-9 at the end of the ID string
             
-    } return id;
-    }
+    } 
+            return id;
+   }
     
     //validation methods:
     
@@ -116,6 +117,7 @@ public String sentMessage(int option) {
     //option 1 send message
     if (option == 1) {
         messageStatus = "Sent";
+        storeMessage();
     return "Message sent";       
     }
     

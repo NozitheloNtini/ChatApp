@@ -19,28 +19,7 @@ public class Message {
     private String messageStatus; //this will flags/alerts if message is sent, stored or disregarded
     
     //creating a static field because they shared across all Message objects. it tracks how many messages are created
-    private static int totalMessages =0;
-    
-    //declaring arrays
-    private static String[] sentMessages;
-    private static String[] storedMessages;
-    private static String[] disregardedMessages;
-    private static String[] messageHashes;
-    private static String[] messageIDs;
-    
-    //tracks how many of the slots are filled
-    private static int sentMsgsCount = 0; // how many messages are sent for far?
-    private static int storedMsgsCount = 0; //how many stored
-    private static int disregardedMsgsCount = 0; // how many disregarded
-    
-    //setup arrays with the given size
-    public static void setupArrays(int size) {
-        sentMessages = new String[size];
-        storedMessages = new String[size];
-        disregardedMessages = new String[size];
-        messageHashes = new String[size];
-        messageIDs = new String[size];
-    }
+    private static int totalMessages = 0;
     
     //constructor to build a message and assign it a number
     public Message(String recipient, String messageText) {
@@ -53,7 +32,7 @@ public class Message {
         this.messageStatus = ""; //has no status yet because the user hasnt chosen what to do with the message yet
     }
         
-    //generating a random message ID
+    //generating a random message ID thats 10 digits long
     private String generateMessageID(){
   
         Random rndm = new Random();
@@ -137,20 +116,12 @@ public String sentMessage(int option) {
     //option 1 send message
     if (option == 1) {
         messageStatus = "Sent";
-        sentMessages[sentMsgsCount]=messageText;
-        messageHashes[sentMsgsCount]= messageHash;
-        messageIDs[sentMsgsCount]= messageID;
-        sentMsgsCount = sentMsgsCount +1; // moves the counter forward so the next send goes to the next slot
     return "Message sent";       
     }
     
     //option 2 store message and save to json
     if (option ==2) {
         messageStatus = "Stored";
-        storedMessages[storedMsgsCount]=messageText;
-        messageHashes[storedMsgsCount]= messageHash;
-        messageIDs[storedMsgsCount]= messageID;
-        storedMsgsCount = storedMsgsCount +1; 
         storeMessage();
     return "Message stored";       
     }
@@ -158,11 +129,20 @@ public String sentMessage(int option) {
     //option 3 disregard the message
     if (option == 3) {
         messageStatus = "Disregarded";
-        disregardedMessages[disregardedMsgsCount]= messageText;
-        disregardedMsgsCount = disregardedMsgsCount +1;
+        //this message wont be stored
     return "Message disregarded";       
 }
      //any other option is invalid
     return "Invalid Option.";
 }
+
+//rreturns one message's full details
+public String printMessages() {
+    return "Message ID: " + messageID + "\n"
+            + "Message Hash: " + messageHash + "\n"
+            + "Recipient: " + recipient + "\n"
+            + "Message: " + messageText + "\n"
+            ;
+}
+
 }

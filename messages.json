@@ -254,3 +254,19 @@
   "messageHash": "63:0:HIMIKE",
   "status": "Sent"
 }
+{
+  "messageID": "0243819371",
+  "messageNumber": 0,
+  "recipient": "+27123456789",
+  "message": "I want to go shopping tomorrow",
+  "messageHash": "02:0:ITOMORROW",
+  "status": "Sent"
+}
+{
+  "messageID": "0166948086",
+  "messageNumber": 1,
+  "recipient": "+27123456789",
+  "message": "Are you free?",
+  "messageHash": "01:1:AREFREE",
+  "status": "Stored"
+}

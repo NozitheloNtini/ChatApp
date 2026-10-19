@@ -24,7 +24,6 @@ public class Message {
     //constructor to build a message and assign it a number
     public Message(String recipient, String messageText) {
         this.messageID = generateMessageID();
-        totalMessages = totalMessages + 1; //increments the shared counter, then assigns
         this.messageNumber = totalMessages;
         this.recipient = recipient;
         this.messageText = messageText;
@@ -92,6 +91,10 @@ public class Message {
 Oracle. (2024). FileWriter (Java Platform SE 8). [Online] Available at: <https://docs.oracle.com/javase/8/docs/api/java/io/FileWriter.html> [Accessed 15 October 2026].
 */
 
+    public void incrementTotalMes(){
+                totalMessages = totalMessages + 1; //increments the shared counter, then assigns
+
+    }
 public void storeMessage() {
 
         // build the JSON text as a single string

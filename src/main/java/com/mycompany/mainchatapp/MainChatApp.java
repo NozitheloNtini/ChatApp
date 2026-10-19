@@ -143,7 +143,12 @@ public class MainChatApp {
                                 System.out.println("Your choice: ");
                                 int sendChoice = Integer.parseInt(obj.nextLine());
                                 
+                                if(msg.sentMessage(sendChoice)=="Message sent"){
+                                    msg.incrementTotalMes();
+                                }
+                                
                                 System.out.println(msg.sentMessage(sendChoice)); //applies the choice and prints the result message
+                               
                                 
                                 i= i+1; //increment only on full success
                             }

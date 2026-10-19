@@ -22,3 +22,107 @@
   "messageHash": "62:7:HIMIKE",
   "status": "Sent"
 }
+{
+  "messageID": "7256274669",
+  "messageNumber": 1,
+  "recipient": "+27123456789",
+  "message": "Message 1 says blah blah",
+  "messageHash": "72:1:MESSAGEBLAH",
+  "status": "Sent"
+}
+{
+  "messageID": "8824595079",
+  "messageNumber": 2,
+  "recipient": "+27123456789",
+  "message": "I want message 2 to say this and that",
+  "messageHash": "88:2:ITHAT",
+  "status": "Stored"
+}
+{
+  "messageID": "9019068214",
+  "messageNumber": 1,
+  "recipient": "+27123456789",
+  "message": "First message is going to be sent here",
+  "messageHash": "90:1:FIRSTHERE",
+  "status": "Sent"
+}
+{
+  "messageID": "9001035057",
+  "messageNumber": 1,
+  "recipient": "+27123456789",
+  "message": "fguid fglfgiufgawf ndfflywegifpwe8hfsdf bgrghusdhffhh gdsblhliuhpefhrewoih8we9yfudhvds vhprugh[098efhidbvdpuhpa[\8y[89wywhfbdviguhduvhufhfsdhh euhpe[8EEUFGDFIFHUFB HEUPEPH[he[hefbeuehfiuhf[oiehfenfuhfuehfuhjifbdgugibdpbeugheuhfuihduifhpfhugpf",
+  "messageHash": "90:1:FGUIDHEUPEPHHEHEFBEUEHFIUHFOIEHFENFUHFUEHFUHJIFBDGUGIBDPBEUGHEUHFUIHDUIFHPFHUGPF",
+  "status": "Sent"
+}
+{
+  "messageID": "8733920310",
+  "messageNumber": 2,
+  "recipient": "+27123456789",
+  "message": "This one will store",
+  "messageHash": "87:2:THISSTORE",
+  "status": "Stored"
+}
+{
+  "messageID": "4389172243",
+  "messageNumber": 2,
+  "recipient": "+27123456789",
+  "message": "This is the correct message size for sending now",
+  "messageHash": "43:2:THISNOW",
+  "status": "Sent"
+}
+{
+  "messageID": "1556932469",
+  "messageNumber": 3,
+  "recipient": "+27123456789",
+  "message": "I want to store this one",
+  "messageHash": "15:3:IONE",
+  "status": "Stored"
+}
+{
+  "messageID": "4873844475",
+  "messageNumber": 1,
+  "recipient": "+27718693002",
+  "message": "Hi Mike",
+  "messageHash": "48:1:HIMIKE",
+  "status": "Stored"
+}
+{
+  "messageID": "6510827229",
+  "messageNumber": 7,
+  "recipient": "+27718693002",
+  "message": "Hi Mike",
+  "messageHash": "65:7:HIMIKE",
+  "status": "Sent"
+}
+{
+  "messageID": "2588670724",
+  "messageNumber": 0,
+  "recipient": "+27123456789",
+  "message": "this one i will send to test",
+  "messageHash": "25:0:THISTEST",
+  "status": "Sent"
+}
+{
+  "messageID": "2588670724",
+  "messageNumber": 0,
+  "recipient": "+27123456789",
+  "message": "this one i will send to test",
+  "messageHash": "25:0:THISTEST",
+  "status": "Sent"
+}
+{
+  "messageID": "4649249406",
+  "messageNumber": 1,
+  "recipient": "+27123456789",
+  "message": "short message now",
+  "messageHash": "46:1:SHORTNOW",
+  "status": "Stored"
+}
+{
+  "messageID": "4649249406",
+  "messageNumber": 1,
+  "recipient": "+27123456789",
+  "message": "short message now",
+  "messageHash": "46:1:SHORTNOW",
+  "status": "Stored"
+}

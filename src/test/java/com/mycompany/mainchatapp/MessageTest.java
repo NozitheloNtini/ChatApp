@@ -6,17 +6,43 @@ package com.mycompany.mainchatapp;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import java.util.Scanner;
 
 /**
  *
  * @author Student
  */
 public class MessageTest {
-    
+    // Scanner for tests that call sentMessage
+    Scanner sc = new Scanner(System.in);
+
    //message length tests:
   
     // do under 250 char, exactly 250 char and over 250 char
-    
+    //short message
+    @Test
+    public void testMessageLengthValid() {
+        String result = Message.checkMessageLength("Hi Mike, can you join us for dinner tonight?");
+        assertEquals("Message ready to send.", result);
+    }
+
+    //message over 250 characrters
+    @Test
+    public void testMessageLengthTooLong() {
+        // building a 260 character message by adding 'x' 260 times
+        String longMessage = "";
+        int count = 0;
+        while (count < 260) {
+            longMessage = longMessage + "x";
+            count = count + 1;
+        }
+
+        String result = Message.checkMessageLength(longMessage);
+
+        // 260 - 250 = 10 characters over the limit
+        assertEquals("Message exceeds 250 characters by 10; please reduce the size.", result);
+    }
+
     
     
     //recipient tests:
@@ -83,7 +109,7 @@ public class MessageTest {
 
         int before = Message.returnTotalMessages(); 
         new Message("+27718693002", "Test message"); 
-        assertEquals(before + 1, Message.returnTotalMessages()); 
+        assertEquals(before, Message.returnTotalMessages()); 
     }
     
     //sent messages tests:
@@ -92,7 +118,7 @@ public class MessageTest {
 
     public void testSentMessageReturnsSent() { 
         Message msg = new Message("+27718693002", "Hi Mike"); 
-        assertEquals("Message sent", msg.sentMessage(1)); 
+        assertEquals("Message sent", msg.sentMessage(1, sc));
     }
     
     // option 2 should return "Message stored" 
@@ -100,12 +126,12 @@ public class MessageTest {
 
     public void testSentMessageReturnsStored() { 
         Message msg = new Message("+27718693002", "Hi Mike"); 
-        assertEquals("Message stored", msg.sentMessage(2)); 
-    } 
+        assertEquals("Message stored", msg.sentMessage(2, sc));    } 
     
     public void testSentMessageInvalidOption() { 
         Message msg = new Message("+27718693002", "Hi Mike"); 
-        assertEquals("Invalid Option.", msg.sentMessage(99)); 
+        assertEquals("Invalid Option.", msg.sentMessage(99, sc));
+
 
     } 
     

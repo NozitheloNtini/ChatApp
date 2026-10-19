@@ -67,7 +67,7 @@ public class Message {
         if (msg.length()<= 250) {
             return "Message ready to send.";
             
-        } return "Message exceeds 250 characters by " + (msg.length() - 250) +" please reduce the size.";
+        } return "Message exceeds 250 characters by " + (msg.length() - 250) +"; please reduce the size.";
     }
     
     //creating a method hash (first 2 numbers of ID:message number:FIRSTWORD+LASTWORD)

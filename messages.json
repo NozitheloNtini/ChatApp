@@ -174,3 +174,83 @@
   "messageHash": "89:1:IDOES",
   "status": "Sent"
 }
+{
+  "messageID": "6984655486",
+  "messageNumber": 0,
+  "recipient": "+27718693002",
+  "message": "Hi Mike",
+  "messageHash": "69:0:HIMIKE",
+  "status": "Stored"
+}
+{
+  "messageID": "1457990026",
+  "messageNumber": 0,
+  "recipient": "+27718693002",
+  "message": "Hi Mike",
+  "messageHash": "14:0:HIMIKE",
+  "status": "Sent"
+}
+{
+  "messageID": "1326095869",
+  "messageNumber": 0,
+  "recipient": "+27718693002",
+  "message": "Hi Mike",
+  "messageHash": "13:0:HIMIKE",
+  "status": "Stored"
+}
+{
+  "messageID": "2337058087",
+  "messageNumber": 0,
+  "recipient": "+27718693002",
+  "message": "Hi Mike",
+  "messageHash": "23:0:HIMIKE",
+  "status": "Sent"
+}
+{
+  "messageID": "3240523234",
+  "messageNumber": 0,
+  "recipient": "+27718693002",
+  "message": "Hi Mike",
+  "messageHash": "32:0:HIMIKE",
+  "status": "Stored"
+}
+{
+  "messageID": "3154048189",
+  "messageNumber": 0,
+  "recipient": "+27718693002",
+  "message": "Hi Mike",
+  "messageHash": "31:0:HIMIKE",
+  "status": "Sent"
+}
+{
+  "messageID": "0752290785",
+  "messageNumber": 0,
+  "recipient": "+27718693002",
+  "message": "Hi Mike",
+  "messageHash": "07:0:HIMIKE",
+  "status": "Stored"
+}
+{
+  "messageID": "0519479834",
+  "messageNumber": 0,
+  "recipient": "+27718693002",
+  "message": "Hi Mike",
+  "messageHash": "05:0:HIMIKE",
+  "status": "Sent"
+}
+{
+  "messageID": "7868684824",
+  "messageNumber": 0,
+  "recipient": "+27718693002",
+  "message": "Hi Mike",
+  "messageHash": "78:0:HIMIKE",
+  "status": "Stored"
+}
+{
+  "messageID": "6392242866",
+  "messageNumber": 0,
+  "recipient": "+27718693002",
+  "message": "Hi Mike",
+  "messageHash": "63:0:HIMIKE",
+  "status": "Sent"
+}

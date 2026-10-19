@@ -1,0 +1,24 @@
+{
+  "messageID": "0288807236",
+  "messageNumber": 1,
+  "recipient": "+27842234979",
+  "message": "heyy",
+  "messageHash": "02:1:HEYYHEYY",
+  "status": "Sent"
+}
+{
+  "messageID": "3636768430",
+  "messageNumber": 1,
+  "recipient": "+27718693002",
+  "message": "Hi Mike",
+  "messageHash": "36:1:HIMIKE",
+  "status": "Stored"
+}
+{
+  "messageID": "6235141869",
+  "messageNumber": 7,
+  "recipient": "+27718693002",
+  "message": "Hi Mike",
+  "messageHash": "62:7:HIMIKE",
+  "status": "Sent"
+}

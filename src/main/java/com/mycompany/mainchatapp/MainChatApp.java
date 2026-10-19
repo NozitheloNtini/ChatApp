@@ -116,22 +116,26 @@ public class MainChatApp {
                      System.out.println("Enter your message (max 250 characters): ");
                      String text = obj.nextLine();
                      
-                     //checking message length
+                     //checking message length first before creating message obj so it doesnt wste time building a message that will be ignored
                      String lengthCheck = Message.checkMessageLength(text);
-                     if (!lengthCheck.equals("Message ready to send.")) {
+                     if (!lengthCheck.equals("Message ready to send.")) { //if mesage is too long, it prints an error
                          System.out.println(lengthCheck);
                      
                      }else{
                             Message msg = new Message(recipient, text);
                             
-                            if (!msg.checkRecipientCell().equals("Cell phone number successfully captured.")) {
-                                System.out.println("Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.");
+                            if (!msg.checkRecipientCell().equals("Cell phone number successfully captured.")) { //checks recipient number format
+                                System.out.println("Cell phone number is incorrectly formatted or does not contain an international code. "
+                                        + "+ Please correct the number and try again."); //prints this if number is invalid
                             } else {
+                                
+                                //if everything is valid, it'll show the message details
                                 System.out.println("Cell phone number successfully captured.");
                                 
                                 System.out.println("\n--- Message Details ---");
                                 System.out.println(msg.printMessages());
                                 
+                                //asks the user what to do with the message
                                 System.out.println("Choose an option:");
                                 System.out.println("1. Send message");
                                 System.out.println("2. Store message");
@@ -139,20 +143,20 @@ public class MainChatApp {
                                 System.out.println("Your choice: ");
                                 int sendChoice = Integer.parseInt(obj.nextLine());
                                 
-                                System.out.println(msg.sentMessage(sendChoice));
+                                System.out.println(msg.sentMessage(sendChoice)); //applies the choice and prints the result message
                                 
                                 i= i+1; //increment only on full success
                             }
                      }
                  }   
             
-                 System.out.println("\n Total messages sent: " + Message.returnTotalMessages() );
+                 System.out.println("\n Total messages sent: " + Message.returnTotalMessages() ); //after all message are entered, it;ll show the total created
                    } else if (option==2){
                      System.out.println("Feature coming soon.");
                      
                    } else if (option ==3) {
                        System.out.println("Goodbye!");
-                       isAppWorking = false;
+                       isAppWorking = false; //sets the flag to false so the loop exits
                    }else {
                        System.out.println("Invalid option. Please choose 1, 2 or 3.");
                        

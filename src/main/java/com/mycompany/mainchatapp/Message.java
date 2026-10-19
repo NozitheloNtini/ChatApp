@@ -67,7 +67,7 @@ public class Message {
         if (msg.length()<= 250) {
             return "Message ready to send.";
             
-        } return "Message exceeds 250 characters by " + (msg.length() - 250) +"please reduce the size.";
+        } return "Message exceeds 250 characters by " + (msg.length() - 250) +" please reduce the size.";
     }
     
     //creating a method hash (first 2 numbers of ID:message number:FIRSTWORD+LASTWORD)
@@ -91,11 +91,7 @@ public class Message {
 /*File writer approach referenced from:
 Oracle. (2024). FileWriter (Java Platform SE 8). [Online] Available at: <https://docs.oracle.com/javase/8/docs/api/java/io/FileWriter.html> [Accessed 15 October 2026].
 */
-
-    public void incrementTotalMes(){
-                totalMessages = totalMessages + 1; //increments the shared counter, then assigns
-
-    }
+    
 public void storeMessage() {
 
         // build the JSON text as a single string
@@ -117,11 +113,12 @@ public void storeMessage() {
     }
 
 // handles the user's choice: send, store or disregard the message
-public String sentMessage(int option) {
+public String sentMessage(int option, Scanner confirm) {
     //option 1 send message
     if (option == 1) {
         messageStatus = "Sent";
         storeMessage();
+        totalMessages = totalMessages + 1;
     return "Message sent";       
     }
     
@@ -135,15 +132,15 @@ public String sentMessage(int option) {
     //option 3 disregard the message
     if (option == 3) {
         //ask the user to confirm before discarding to avoid accidental deletions
-        Scanner confirm = new Scanner(System.in);
+      
         System.out.println("Are you sure you want to disregard this message? Type -1 to confirm:");
         int confirmChoice = Integer.parseInt(confirm.nextLine());
         
         if (confirmChoice == -1) {
         messageStatus = "Disregarded";
         //this message wont be stored
-    return "Message disregarded";       
-} else {
+        return "Message disregarded";       
+        } else {
             return "Disregard cancelled.";
         }
      //any other option is invalid

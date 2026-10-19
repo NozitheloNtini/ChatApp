@@ -126,3 +126,51 @@
   "messageHash": "46:1:SHORTNOW",
   "status": "Stored"
 }
+{
+  "messageID": "5818761006",
+  "messageNumber": 0,
+  "recipient": "+27123456789",
+  "message": "This message with be sent",
+  "messageHash": "58:0:THISSENT",
+  "status": "Sent"
+}
+{
+  "messageID": "5818761006",
+  "messageNumber": 0,
+  "recipient": "+27123456789",
+  "message": "This message with be sent",
+  "messageHash": "58:0:THISSENT",
+  "status": "Sent"
+}
+{
+  "messageID": "9712643774",
+  "messageNumber": 0,
+  "recipient": "+27123456789",
+  "message": "fnhvhif jfhfhjdk fhhsnbdjhf dbggfbbjsjf  ",
+  "messageHash": "97:0:FNHVHIFDBGGFBBJSJF",
+  "status": "Sent"
+}
+{
+  "messageID": "6328163077",
+  "messageNumber": 0,
+  "recipient": "+27123456789",
+  "message": "short message test",
+  "messageHash": "63:0:SHORTTEST",
+  "status": "Sent"
+}
+{
+  "messageID": "8159459732",
+  "messageNumber": 1,
+  "recipient": "+27123456789",
+  "message": "another trial ",
+  "messageHash": "81:1:ANOTHERTRIAL",
+  "status": "Stored"
+}
+{
+  "messageID": "8978879191",
+  "messageNumber": 1,
+  "recipient": "+27123456789",
+  "message": "i want to see what this does",
+  "messageHash": "89:1:IDOES",
+  "status": "Sent"
+}

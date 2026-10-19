@@ -4,6 +4,7 @@
  */
 package com.mycompany.mainchatapp;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  *
@@ -133,12 +134,20 @@ public String sentMessage(int option) {
     
     //option 3 disregard the message
     if (option == 3) {
+        //ask the user to confirm before discarding to avoid accidental deletions
+        Scanner confirm = new Scanner(System.in);
+        System.out.println("Are you sure you want to disregard this message? Type -1 to confirm:");
+        int confirmChoice = Integer.parseInt(confirm.nextLine());
+        
+        if (confirmChoice == -1) {
         messageStatus = "Disregarded";
         //this message wont be stored
     return "Message disregarded";       
-}
+} else {
+            return "Disregard cancelled.";
+        }
      //any other option is invalid
-    return "Invalid Option.";
+    } return "Invalid Option.";
 }
 
 //returns one message's full details

@@ -20,17 +20,22 @@ public class Message {
     private String messageStatus; //this will flags/alerts if message is sent, stored or disregarded
     
     //creating a static field because they shared across all Message objects. it tracks how many messages are created
-    private static int totalMessages = 0;
+    private static int totalMessagesCreated = 0;
     
     //constructor to build a message and assign it a number
     public Message(String recipient, String messageText) {
         this.messageID = generateMessageID();
-        this.messageNumber = totalMessages;
+        this.messageNumber = totalMessagesCreated;
+        totalMessagesCreated++;
         this.recipient = recipient;
         this.messageText = messageText;
         this.messageHash = createMessageHash();
         this.messageStatus = ""; //has no status yet because the user hasnt chosen what to do with the message yet
     }
+    
+    public static int returnTotalMessages() {
+    return totalMessagesCreated;
+}
         
     //generating a random message ID thats 10 digits long
     private String generateMessageID(){

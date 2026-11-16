@@ -46,7 +46,7 @@ public class Message {
                 sb.append(rndm.nextInt(10));
    }
           return String.format("%s", sb.toString());
-   
+    }
     //validation methods:
     
     //method to ensure message id is not more than 10 characters
@@ -122,33 +122,32 @@ public String sentMessage(int option, Scanner confirm) {
         messageStatus = "Sent";
         storeMessage();
         totalMessages = totalMessages + 1;
-    return "Message sent";       
+    return "Message successfully sent.";       
     }
     
-    //option 2 store message and save to json
+    // option 2 disregard(confirm with -1 to avoid mistaken deletes)
     if (option ==2) {
-        messageStatus = "Stored";
-        storeMessage();
-    return "Message stored";       
-    }
-    
-    //option 3 disregard the message
-    if (option == 3) {
-        //ask the user to confirm before discarding to avoid accidental deletions
-      
-        System.out.println("Are you sure you want to disregard this message? Type -1 to confirm:");
+        System.out.println("Press 0 to delete the message.");
+        // -1 is intentional. It needs a deliberate input
+        System.out.println("Type -1 to confirm deletion:");
         int confirmChoice = Integer.parseInt(confirm.nextLine());
         
         if (confirmChoice == -1) {
-        messageStatus = "Disregarded";
-        //this message wont be stored
-        return "Message disregarded";       
+            messageStatus = "Disregarded";
+            return "Message disregarded.";
         } else {
             return "Disregard cancelled.";
         }
-     //any other option is invalid
-    } return "Invalid Option.";
+    }
+     //option 3 store message
+     if (option == 3) {
+        messageStatus = "Stored";
+        storeMessage();
+        return "Message successfully stored.";
+    }
+    return "Invalid Option.";
 }
+    
 
 //returns one message's full details
 public String printMessages() {
@@ -159,9 +158,6 @@ public String printMessages() {
             ;
 }
 
-//total messages
-public static int returnTotalMessages(){
-    return totalMessages;
-}
+
 
 }

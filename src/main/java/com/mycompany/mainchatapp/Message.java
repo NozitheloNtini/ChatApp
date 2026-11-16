@@ -41,14 +41,12 @@ public class Message {
     private String generateMessageID(){
   
         Random rndm = new Random();
-        String id = "";
+        StringBuilder sb = new StringBuilder();
             for (int i=0; i <10; i++){ //loops 10 times
-                id = id + rndm.nextInt(10); // add a random number 0-9 at the end of the ID string
-            
-    } 
-            return id;
+                sb.append(rndm.nextInt(10));
    }
-    
+          return String.format("%s", sb.toString());
+   
     //validation methods:
     
     //method to ensure message id is not more than 10 characters

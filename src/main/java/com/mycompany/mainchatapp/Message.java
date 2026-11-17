@@ -47,7 +47,7 @@ public class Message {
     }
     //validation methods:
     
-    //method to ensure message id is not more than 10 characters
+    // returns the generated ID as a status string for the test
     public String checkMessageID() {
         if (messageID == null) {
             return "Message ID not generated.";
@@ -143,7 +143,6 @@ public String sentMessage(int option, Scanner confirm) {
     if (option == 1) {
         messageStatus = "Sent";
         storeMessage();
-        totalMessagesCreated = totalMessagesCreated + 1;
     return "Message successfully sent.";       
     }
     

@@ -109,14 +109,7 @@ public class MessageTest {
     
     
     //messageID tests:
-    
-    //generated IDs are always 10 digits so this should be true 
-    @Test 
-    public void testCheckMessageID() { 
-        Message msg = new Message("+27718693002", "Hello");
-    assertEquals("Message ID generated: " + msg.getMessageID(), msg.checkMessageID());     
-    } 
-    
+   
     //messageID as return string
     @Test
     public void testMessageIDGenerated() {

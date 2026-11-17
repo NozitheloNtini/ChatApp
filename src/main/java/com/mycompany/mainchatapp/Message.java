@@ -136,13 +136,14 @@ public void storeMessage() { //storeMessage() as a string only array
     }
         
     }
-
+private static int totalMessagesSent = 0; 
 // handles the user's choice: send, store or disregard the message
 public String sentMessage(int option, Scanner confirm) {
     //option 1 send message
     if (option == 1) {
         messageStatus = "Sent";
         storeMessage();
+        totalMessagesSent++;
     return "Message successfully sent.";       
     }
     
@@ -169,6 +170,9 @@ public String sentMessage(int option, Scanner confirm) {
     return "Invalid Option.";
 }
     
+public static int returnTotalSent() {
+    return totalMessagesSent;
+}
 
 //returns one message's full details
 public String printMessages() {
@@ -191,5 +195,6 @@ public String getMessageID() { return messageID; }
 // resets count to 0 for tests
 public static void resetForTests() {
     totalMessagesCreated = 0;
+    totalMessagesSent = 0;
 }
 }

@@ -95,7 +95,7 @@ public class MainChatApp {
          while (isAppWorking) {
              System.out.println("---QuickChat Menu---");
              System.out.println("1. Send messages");
-             System.out.println("2. Show recently sent messages (Coming soon.)");
+             System.out.println("2. Show recently sent messages (Coming Soon.)");
              System.out.println("3. Quit");
              System.out.println("");
              System.out.println("Choose an option:");
@@ -145,13 +145,17 @@ public class MainChatApp {
                                 System.out.println("\n--- Message Details ---");
                                 System.out.println(msg.printMessages());
                                 
-                                System.out.println(msg.sentMessage(sendChoice, obj)); //applies the choice and prints the result message
+                                if (sendChoice == 2) {
+                                    msg.sentMessage(sendChoice, obj);   // calls only, doesnt print
+                                } else {
+                                    System.out.println(msg.sentMessage(sendChoice, obj));   // prints for options 1 and 3
+}
                                }
                             
-                                  System.out.println("\n Total messages sent: " + Message.returnTotalMessages() ); //after all message are entered, it;ll show the total created
+                                  System.out.println("\n Total messages sent: " + Message.returnTotalSent() ); //after all message are entered, it;ll show the total created
 
                      } else if (option==2){
-                     System.out.println("Coming soon.");
+                     System.out.println("Coming Soon.");
                      
                    } else if (option ==3) {
                        System.out.println("Goodbye!");

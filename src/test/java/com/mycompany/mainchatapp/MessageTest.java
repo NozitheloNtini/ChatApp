@@ -128,6 +128,14 @@ public class MessageTest {
             assertEquals(before + 1, Message.returnTotalMessages());
 
     }
+    //tests sent counter
+    @Test
+    public void testReturnTotalSentIncrements() {
+        int before = Message.returnTotalSent();
+        Message msg = new Message("+27718693002", "Test message");
+        msg.sentMessage(1, sc);
+        assertEquals(before + 1, Message.returnTotalSent());
+}
     
     //sent messages tests:
     // option 1 should return "Message sent" 

@@ -95,7 +95,8 @@ public class Message {
 Oracle. (2024). FileWriter (Java Platform SE 8). [Online] Available at: <https://docs.oracle.com/javase/8/docs/api/java/io/FileWriter.html> [Accessed 15 October 2026].
 */
     
-public void storeMessage() { //storeMessage() as a string only array    
+public void storeMessage() { //storeMessage() as a string only array
+        
     String newObject =
           "{\n"
         + "  \"messageID\": \"" + messageID + "\",\n"

@@ -33,9 +33,7 @@ public class Message {
         this.messageStatus = ""; //has no status yet because the user hasnt chosen what to do with the message yet
     }
     
-    public static int returnTotalMessages() {
-    return totalMessagesCreated;
-}
+    
         
     //generating a random message ID thats 10 digits long
     private String generateMessageID(){
@@ -145,7 +143,7 @@ public String sentMessage(int option, Scanner confirm) {
     if (option == 1) {
         messageStatus = "Sent";
         storeMessage();
-        totalMessages = totalMessages + 1;
+        totalMessagesCreated = totalMessagesCreated + 1;
     return "Message successfully sent.";       
     }
     
@@ -182,6 +180,13 @@ public String printMessages() {
             ;
 }
 
+public static int returnTotalMessages() {
+    return totalMessagesCreated;
+}
 
+//getters to test can build full hash
+public int getMessageNumber() { return messageNumber; }
+public String getMessageHash() { return messageHash; }
+public String getMessageID() { return messageID; }
 
 }

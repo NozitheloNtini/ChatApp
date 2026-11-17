@@ -189,4 +189,8 @@ public int getMessageNumber() { return messageNumber; }
 public String getMessageHash() { return messageHash; }
 public String getMessageID() { return messageID; }
 
+// resets count to 0 for tests
+public static void resetForTests() {
+    totalMessagesCreated = 0;
+}
 }

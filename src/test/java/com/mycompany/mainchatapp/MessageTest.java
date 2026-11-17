@@ -23,6 +23,7 @@ public class MessageTest {
         public void reset() {
         Message.resetForTests();
     }
+        
    //message length tests:
   
     // do under 250 char, exactly 250 char and over 250 char
@@ -112,9 +113,8 @@ public class MessageTest {
     //generated IDs are always 10 digits so this should be true 
     @Test 
     public void testCheckMessageID() { 
-
-        Message msg = new Message("+27718693002", "Hello"); 
-        assertTrue(msg.checkMessageID()); 
+        Message msg = new Message("+27718693002", "Hello");
+    assertEquals("Message ID generated: " + msg.getMessageID(), msg.checkMessageID());     
     } 
     
     //messageID as return string
@@ -129,10 +129,11 @@ public class MessageTest {
     //creating a Message should increment the shared static counter by 1 
     @Test 
     public void testReturnTotalMessagesIncrements() { 
+        int before = Message.returnTotalMessages();
+            new Message("+27718693002", "Test message");
+            
+            assertEquals(before + 1, Message.returnTotalMessages());
 
-        int before = Message.returnTotalMessages(); 
-        new Message("+27718693002", "Test message"); 
-        assertEquals(before, Message.returnTotalMessages()); 
     }
     
     //sent messages tests:
@@ -141,14 +142,16 @@ public class MessageTest {
 
     public void testSentMessageReturnsSent() { 
         Message msg = new Message("+27718693002", "Hi Mike"); 
-        assertEquals("Message sent", msg.sentMessage(1, sc));
+        assertEquals("Message successfully sent.", msg.sentMessage(1, sc));
     }
     
     // option 2 should return discard
     @Test
     public void testSentMessageReturnsDisregard() {
         Message msg = new Message("+27718693002", "Hi Mike");
-        assertEquals("Press 0 to delete the message.", msg.sentMessage(2, sc));
+        Scanner fakeInput = new Scanner("-1"); //feeding test -1, this is to prevent the test from hanging
+    assertEquals("Press 0 to delete the message.", msg.sentMessage(2, fakeInput));
+
     }
 
     //option 3 should be stored

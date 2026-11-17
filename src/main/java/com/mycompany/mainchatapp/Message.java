@@ -95,24 +95,47 @@ public class Message {
 Oracle. (2024). FileWriter (Java Platform SE 8). [Online] Available at: <https://docs.oracle.com/javase/8/docs/api/java/io/FileWriter.html> [Accessed 15 October 2026].
 */
     
-public void storeMessage() {
+public void storeMessage() { //storeMessage() as a string only array    
+    String newObject =
+          "{\n"
+        + "  \"messageID\": \"" + messageID + "\",\n"
+        + "  \"messageNumber\": " + messageNumber + ",\n"
+        + "  \"recipient\": \"" + recipient + "\",\n"
+        + "  \"message\": \"" + messageText + "\",\n"
+        + "  \"messageHash\": \"" + messageHash + "\",\n"
+        + "  \"status\": \"" + messageStatus + "\"\n"
+        + "}";
 
-        // build the JSON text as a single string
-        String json = "{\n"
-                + "  \"messageID\": \"" + messageID + "\",\n" // messageID field
-                + "  \"messageNumber\": " + messageNumber + ",\n" // messageNumber field
-                + "  \"recipient\": \"" + recipient + "\",\n" //recipient field
-                + "  \"message\": \"" + messageText + "\",\n" // message text field
-                + "  \"messageHash\": \"" + messageHash + "\",\n" // messageHash field
-                + "  \"status\": \"" + messageStatus + "\"\n" //status field
-                + "}\n";
-
-        
-        try (java.io.FileWriter writer = new java.io.FileWriter("messages.json", true)) {
-            writer.write(json);
-        } catch (java.io.IOException e) {
-            System.out.println("Error storing message: " + e.getMessage());
+    // read file into string
+    String oldContent = "";
+    try (java.io.BufferedReader reader =
+             new java.io.BufferedReader(new java.io.FileReader("messages.json"))) {
+        StringBuilder sb = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            sb.append(line).append("\n");
         }
+        oldContent = sb.toString().trim();
+    } catch (java.io.IOException e) {
+        oldContent = "";
+    }
+
+    // rewrap into array
+    String finalJson;
+    if (oldContent.isEmpty()) {
+        finalJson = "[\n" + newObject + "\n]\n";
+    } else {
+        String inner = oldContent.substring(1, oldContent.length() - 1).trim();
+        finalJson = "[\n" + inner + ",\n" + newObject + "\n]\n";
+    }
+
+    try (java.io.FileWriter writer =
+             new java.io.FileWriter("messages.json", false)) {
+        writer.write(finalJson);
+    } catch (java.io.IOException e) {
+        System.out.println("Error storing message: " + e.getMessage());
+    }
+        
     }
 
 // handles the user's choice: send, store or disregard the message

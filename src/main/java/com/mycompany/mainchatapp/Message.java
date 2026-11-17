@@ -48,11 +48,11 @@ public class Message {
     //validation methods:
     
     //method to ensure message id is not more than 10 characters
-    public boolean checkMessageID() {
+    public String checkMessageID() {
         if (messageID == null) {
-            return false;
+            return "Message ID not generated.";
     }
-    return messageID.length() <= 10;
+    return "Message ID generated: " + messageID;
 }
     
     //method to check cell number
@@ -156,7 +156,7 @@ public String sentMessage(int option, Scanner confirm) {
         
         if (confirmChoice == -1) {
             messageStatus = "Disregarded";
-            return "Message disregarded.";
+            return "Press 0 to delete the message."; //returning the prompt not Message Discarded
         } else {
             return "Disregard cancelled.";
         }

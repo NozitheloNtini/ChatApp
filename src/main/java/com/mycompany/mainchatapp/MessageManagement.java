@@ -143,6 +143,23 @@ Called once per message after Message.sentMessage() returns.
         // trim() drops the trailing newline from the last append()
         return sb.toString().trim();
     }
+
+    /*returns the recipient and message for the stored entry with
+   the given message ID or a not found string.
+    
+    This is the "search by message ID" feature
+    It reads the three relevant parallel arrays on
+     the same index so the ID, recipient and text always refer
+     to the same entry*/
+    public String searchByMessageID(String id) {
+        for (int i = 0; i < storedIDs.length; i++) {
+            if (storedIDs[i].equals(id)) {
+                return "Recipient: " + storedRecipients[i]
+                     + "\nMessage: "   + storedMessages[i];
+            }
+        }
+        return "Message ID not found.";
+    }
         /*
     The same physical number can be written three ways:
         +27838884567   (international with plus)

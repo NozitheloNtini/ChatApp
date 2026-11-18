@@ -16,7 +16,14 @@ public class MainChatApp {
       Scanner obj = new Scanner(System.in);
       boolean isLoggedIn = false;
       LoginClass validation = new LoginClass("", "", "", "", ""); //used to validate methods 
-       
+     
+      /*instantiate the manager once per run. Loading thestored messages here
+        means the "Stored Messages" menu has data available the moment the user reaches 
+        the main menu, before they have sent anything in this session.*/
+      
+      MessageManagement manager = new MessageManagement();
+      manager.loadStoredMessagesFromJson("messages.json");
+     
     //Registration
     
         System.out.println("----Welcome to QuickChat Registration.----");
@@ -100,7 +107,16 @@ public class MainChatApp {
              System.out.println("");
              System.out.println("Choose an option:");
              
-             int option = Integer.parseInt(obj.nextLine());
+             //paise is inside a try so a non number input doesnt crash the whole app.
+             //a failed parse just reprints the menu
+             int option;
+             try {
+                 option = Integer.parseInt(obj.nextLine());
+             } catch (NumberFormatException e) {
+                 System.out.println("Invalid option. Please choose 1, 2, 3 or 4.");
+                 continue;
+             }
+             
              
              if (option ==1) {
                  //the for loop will run numMessages times (if user chooses 3 for numMessages, it'll run 3 times)
@@ -149,9 +165,19 @@ public class MainChatApp {
                                     msg.sentMessage(sendChoice, obj);   // calls only, doesnt print
                                 } else {
                                     System.out.println(msg.sentMessage(sendChoice, obj));   // prints for options 1 and 3
-}
+                                }
+                                /*registerAction() decides which slot based on sendChoice (1,2 or 3)
+                                */
+                                manager.registerAction(
+                                        msg.getMessageText(),
+                                        msg.getRecipient(),
+                                        msg.getMessageHash(),
+                                        msg.getMessageID(),
+                                        sendChoice
+                                );
+  
                                }
-                            
+        
                                   System.out.println("\n Total messages sent: " + Message.returnTotalSent() ); //after all message are entered, it;ll show the total created
 
                      } else if (option==2){
@@ -160,13 +186,60 @@ public class MainChatApp {
                    } else if (option ==3) {
                        System.out.println("Goodbye!");
                        isAppWorking = false; //sets the flag to false so the loop exits
+                       
+                    } else if (option == 4) {
+                       handleStoredMessagesMenu(obj, manager);   
+                       
                    }else {
-                       System.out.println("Invalid option. Please choose 1, 2 or 3.");
+                       System.out.println("Invalid option. Please choose 1, 2, 3 or 4.");
          }    
                  }   
             
                     
     }
-    
+    /*menu for option 4 (Stored Messages).
+     
+    Each letter maps to one of the six Part 3 features plus g
+     to return to the main menu. The menu loops until g so the
+     user can inspect several things without re navigating.
+     */
+    private static void handleStoredMessagesMenu(Scanner obj, MessageManagement manager) {
+       boolean inMenu = true;
+    while (inMenu) {
+        System.out.println("\n--- Stored Messages Menu ---");
+        System.out.println("a. Display sender and recipient of stored messages");
+        System.out.println("b. Display the longest stored message");
+        System.out.println("c. Search by message ID");
+        System.out.println("d. Search all messages for a recipient");
+        System.out.println("e. Delete a message by hash");
+        System.out.println("f. Display full report");
+        System.out.println("g. Back to main menu");
+        System.out.print("Choose: ");
+        
+        String choice = obj.nextLine().trim().toLowerCase();
+
+         if (choice.equals("a")) {
+            System.out.println(manager.displayStoredSenderRecipient());
+        } else if (choice.equals("b")) {
+            System.out.println(manager.displayLongestStoredMessage());
+        } else if (choice.equals("c")) {
+            System.out.print("Enter message ID: ");
+            System.out.println(manager.searchByMessageID(obj.nextLine().trim()));
+        } else if (choice.equals("d")) {
+            System.out.print("Enter recipient: ");
+            System.out.println(manager.searchByRecipient(obj.nextLine().trim()));
+        } else if (choice.equals("e")) {
+            System.out.print("Enter message hash: ");
+            System.out.println(manager.deleteByHash(obj.nextLine().trim()));
+        } else if (choice.equals("f")) {
+            System.out.println(manager.displayReport());
+        } else if (choice.equals("g")) {
+            inMenu = false;
+        } else {
+            System.out.println("Invalid choice. Please pick a-g.");
+        }
+        
     }
+    }
+}
 

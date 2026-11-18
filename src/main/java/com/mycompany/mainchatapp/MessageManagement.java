@@ -11,15 +11,15 @@ package com.mycompany.mainchatapp;
 public class MessageManagement {
     //parallel arrays for the 3 message slots
     
-    private String[] sentMessages        = new String[0]; //using 0 as temporary placeholder for empty array slots
-    private String[] sentRecipients      = new String[0];
+    private String[] sentMessages = new String[0]; //using 0 as temporary placeholder for empty array slots
+    private String[] sentRecipients = new String[0];
 
     private String[] disregardedMessages = new String[0];
 
-    private String[] storedMessages      = new String[0];
-    private String[] storedRecipients    = new String[0];
-    private String[] storedHashes        = new String[0];
-    private String[] storedIDs           = new String[0];   
+    private String[] storedMessages = new String[0];
+    private String[] storedRecipients = new String[0];
+    private String[] storedHashes = new String[0];
+    private String[] storedIDs = new String[0];   
     
   //array helpers
     //Java arrays are fixed length so we grow them by allocating a new array with one extra slot and copying the old contents across
@@ -66,10 +66,10 @@ Called once per message after Message.sentMessage() returns.
         disregardedMessages = append(disregardedMessages, messageText);
     } else if (choice == 3) {
         // All four arrays grow by exactly one, in the same order so index i in each always refers to the same message
-        storedMessages   = append(storedMessages,   messageText);
+        storedMessages = append(storedMessages,   messageText);
         storedRecipients = append(storedRecipients, recipient);
-        storedHashes     = append(storedHashes,     hash);
-        storedIDs        = append(storedIDs,        id);
+        storedHashes = append(storedHashes,     hash);
+        storedIDs = append(storedIDs,        id);
     }
     // if choice is anything else, nothing happens
 }
@@ -156,9 +156,7 @@ Called once per message after Message.sentMessage() returns.
         if (digits.startsWith("27")) return digits;
         if (digits.startsWith("0"))  return "27" + digits.substring(1);
         return digits;
-    }
-    
-        
+    }     
     //deletes the stored message whose hash matches the given number    
     /*The four stored arrays are parallel, so removing an entry
      from one without removing the same index from the other three
@@ -219,13 +217,90 @@ Called once per message after Message.sentMessage() returns.
         return sb.toString();
                     }
 
+  //loading stored messages from json
+  /*Reads messages.json and repopulates the four stored parallel
+arrays with every entry whose status is "Stored".
+     
+  The file contains all messages the app has ever written
+   (Sent, Stored, and Disregarded), so the status field is the
+    filter that decides what belongs in the stored messages view.
+     
+    Called once from MainChatApp at startup, before the user can
+    send anything. Appending to the arrays is safe because they
+    start empty. 
+     
+Parsing approach adapted from: 
+   GeeksforGeeks. (2024). How to read a JSON file in Java. [online]. Available at: <https://www.geeksforgeeks.org/how-to-read-and-write-json-files-in-java/> [Accessed 18 November 2026].
+   */
+   public void loadStoredMessagesFromJson(String path) {
+       //reads the whole file into one string
+       StringBuilder raw = new StringBuilder();
+        try (java.io.BufferedReader br =
+                 new java.io.BufferedReader(new java.io.FileReader(path))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                raw.append(line).append("\n");
+            }
+        } catch (java.io.IOException e) {
+            return;
+        }
+        
+    String[] objects = raw.toString().split("\\}");
+         for (String obj:objects) {
+            String id = extractField(obj, "messageID");
+            String recipient = extractField(obj, "recipient");
+            String message = extractField(obj, "message");
+            String hash = extractField(obj, "messageHash");
+            String status = extractField(obj, "status");
+            
+            //skip anything that has trailing brackets or blank lines
+            if (id == null || message == null) continue;
+            
+            //only entries that are stored can go into the stored messages view
+            if (status == null || !status.equalsIgnoreCase("Stored")) continue;
+            
+            //appends the four fields together
+            storedMessages   = append(storedMessages,   message);
+            storedRecipients = append(storedRecipients, recipient == null ? "" : recipient);
+            storedHashes     = append(storedHashes,     hash == null ? "" : hash);
+            storedIDs        = append(storedIDs,        id);
+         }
+   }
+   
+         
+    /*Returns the quoted string value of a JSON field from a raw object
+  block or null if the field is absent.
+   
+  Looks for the pattern key and reads until the next quote.
+  This is deliberately minimal: it handles only the flat
+  string value objects written by Message.storeMessage(), which
+  is the only shape this app produces.
+    
+  Approach adapted from the same GeeksforGeeks article cited on
+  loadStoredMessagesFromJson(): field extraction via indexOf is
+  the technique the article demonstrates.
+     */
+    private static String extractField(String obj, String key) {
+        String needle = "\"" + key + "\":";
+        int keyStart = obj.indexOf(needle);
+        if (keyStart < 0) return null;
+        
+        int valueStart = obj.indexOf('"', keyStart + needle.length());
+        if (valueStart < 0) return null;
+        
+        int valueEnd = obj.indexOf('"', valueStart + 1);
+        if (valueEnd < 0) return null;
+        
+        return obj.substring(valueStart + 1, valueEnd);
+    }
+   
 //getters for the arrays
-   public String[] getSentMessages()        { return sentMessages;        }
-    public String[] getSentRecipients()      { return sentRecipients;      }
-    public String[] getDisregardedMessages() { return disregardedMessages; }
-    public String[] getStoredMessages()      { return storedMessages;      }
-    public String[] getStoredRecipients()    { return storedRecipients;    }
-    public String[] getStoredHashes()        { return storedHashes;        }
-    public String[] getStoredIDs()           { return storedIDs;           }
+   public String[] getSentMessages(){ return sentMessages;}
+    public String[] getSentRecipients(){ return sentRecipients;}
+    public String[] getDisregardedMessages(){ return disregardedMessages;}
+    public String[] getStoredMessages(){ return storedMessages;}
+    public String[] getStoredRecipients(){ return storedRecipients;}
+    public String[] getStoredHashes(){ return storedHashes;}
+    public String[] getStoredIDs(){ return storedIDs;}
 
  }

@@ -73,6 +73,43 @@ Called once per message after Message.sentMessage() returns.
     }
     // if choice is anything else, nothing happens
 }
+   
+   //stored message
+   
+   //returns the stored message with the most characters
+   public String displayLongestStoredMessage() {
+        if (storedMessages.length == 0) {
+            return "No stored messages to display.";
+        }
+    // Track the index of the longest message rather than the string so it copies the longest once at the end
+    int longestIndex = 0;
+        for (int i = 1; i < storedMessages.length; i++) {
+            if (storedMessages[i].length() > storedMessages[longestIndex].length()) {
+                longestIndex = i;
+            }
+        }
+        return "Longest stored message:\n" + storedMessages[longestIndex];
+   }
+   
+   //prints the sender and recipient of everystored message
+   public String displayStoredSenderRecipient() {
+        if (storedMessages.length == 0) {
+            return "No stored messages to display.";
+        }
+        
+   StringBuilder sb = new StringBuilder();
+   sb.append("--- Stored Messages (Sender and Recipient) ---\n");     
+   
+   for (int i = 0; i < storedMessages.length; i++) {
+       sb.append("Sender: Me  to  Recipient: ")
+              .append(storedRecipients[i])
+              .append("\n")
+              .append("Message: ")
+              .append(storedMessages[i])
+              .append("\n\n");   // blank line between entries
+        }
+        return sb.toString();
+   }
    //getters for the arrays
    public String[] getSentMessages()        { return sentMessages;        }
     public String[] getSentRecipients()      { return sentRecipients;      }
@@ -81,5 +118,5 @@ Called once per message after Message.sentMessage() returns.
     public String[] getStoredRecipients()    { return storedRecipients;    }
     public String[] getStoredHashes()        { return storedHashes;        }
     public String[] getStoredIDs()           { return storedIDs;           }
-}
-   
+
+   }

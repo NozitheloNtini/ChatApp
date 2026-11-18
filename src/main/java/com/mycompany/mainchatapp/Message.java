@@ -12,12 +12,12 @@ import java.util.Scanner;
  */
 public class Message {
     //variables
-    private String messageID;
-    private int messageNumber;
+    String messageID; //making this a default access (but not accesible to other classes)
+    int messageNumber;
     private String recipient;
     private String messageText;
-    private String messageHash;
-    private String messageStatus; //this will flags/alerts if message is sent, stored or disregarded
+    String messageHash;
+    String messageStatus; //this will flags/alerts if message is sent, stored or disregarded
     
     //creating a static field because they shared across all Message objects. it tracks how many messages are created
     private static int totalMessagesCreated = 0;
@@ -182,6 +182,28 @@ public String printMessages() {
             + "Message: " + messageText + "\n"
             ;
 }
+
+//read only getters used by the messagemanagement file. these expose part 3 arrays
+public String getRecipient()    { return recipient;    }
+public String getMessageText()  { return messageText;  }
+public String getMessageStatus(){ return messageStatus;}
+
+// Ensures any side effects such as incrementing totalMessagesCreated still run, so counters stay consistent after a reload
+public static Message fromJson(String id, String num, String recipient,
+                                   String text, String hash, String status) {
+
+/* Overwrite the freshly generated values with the persisted ones.
+ This is why the four fields above had to become package-private:
+ we're reassigning them from inside the class's own static factory,
+ which is safe and keeps the change invisible to external callers. */  
+Message m = new Message(recipient, text);
+ 
+        m.messageID     = id;
+        m.messageNumber = (num == null || num.isEmpty()) ? 0 : Integer.parseInt(num);
+        m.messageHash   = hash;
+        m.messageStatus = status;
+        return m;
+    }
 
 public static int returnTotalMessages() {
     return totalMessagesCreated;

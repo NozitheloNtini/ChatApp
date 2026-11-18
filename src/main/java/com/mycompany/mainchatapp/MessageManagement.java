@@ -157,8 +157,69 @@ Called once per message after Message.sentMessage() returns.
         if (digits.startsWith("0"))  return "27" + digits.substring(1);
         return digits;
     }
+    
         
-   //getters for the arrays
+    //deletes the stored message whose hash matches the given number    
+    /*The four stored arrays are parallel, so removing an entry
+     from one without removing the same index from the other three
+     would shift every later entry and silently pair a message
+     with the wrong recipient. removeAt() returns
+     a fresh array minus one index, so we call it four times with
+     the same index and reassign all four fields together
+     
+     Returns a confirmation string that includes the deleted text
+     so the user can see what was removed. Returns a notfound
+      message when the hash does not exist */
+        
+   public String deleteByHash(String hash) {
+        for (int i = 0; i < storedHashes.length; i++) {
+            if (storedHashes[i].equals(hash)) {
+            //Grabs the text before removing it, so the confirmation can quote what was deleted
+              String removedText = storedMessages[i];
+
+              /*Removes index i from every parallel array. Do all four
+                before touching any field, so a half deleted state
+                cannot happen if one line throws*/
+              
+             String[] newMessages   = removeAt(storedMessages,   i);
+                String[] newRecipients = removeAt(storedRecipients, i);
+                String[] newHashes     = removeAt(storedHashes,     i);
+                String[] newIDs        = removeAt(storedIDs,        i);
+
+                // Commit the four new arrays together.
+                storedMessages   = newMessages;
+                storedRecipients = newRecipients;
+                storedHashes     = newHashes;
+                storedIDs        = newIDs;
+
+                return "Message: \"" + removedText + "\" successfully deleted.";
+            }
+        }
+        return "Message hash not found.";
+    } 
+            
+    //Prints a full report of every stored message: hash, recipient and message text, in that order
+   //Returns "No stored messages to display." when the array is empty, matching the other display methods.
+   public String displayReport() {
+        if (storedMessages.length == 0) {
+            return "No stored messages to display.";
+        }
+
+            StringBuilder sb = new StringBuilder();
+                    sb.append("-----STORED MESSAGE REPORT-----\n");
+                    for (int i = 0; i < storedMessages.length; i++) {
+ //all four arrays are read on the same index i, so the hash, recipient and message always belong together
+                    
+              sb.append("Message ID   : ").append(storedIDs[i]).append("\n")
+              .append("Message Hash : ").append(storedHashes[i]).append("\n")
+              .append("Recipient    : ").append(storedRecipients[i]).append("\n")
+              .append("Message      : ").append(storedMessages[i]).append("\n")
+              .append("-------------------------------------------\n");
+        }
+        return sb.toString();
+                    }
+
+//getters for the arrays
    public String[] getSentMessages()        { return sentMessages;        }
     public String[] getSentRecipients()      { return sentRecipients;      }
     public String[] getDisregardedMessages() { return disregardedMessages; }
@@ -167,4 +228,4 @@ Called once per message after Message.sentMessage() returns.
     public String[] getStoredHashes()        { return storedHashes;        }
     public String[] getStoredIDs()           { return storedIDs;           }
 
-   }
+ }

@@ -110,6 +110,54 @@ Called once per message after Message.sentMessage() returns.
         }
         return sb.toString();
    }
+   
+ /* Returns every message (sent or stored) addressed to the given recipient, 
+   one per line, prefixed with [Sent] or [Stored]
+   
+   Both the search input and every stored recipient are passed
+    through normaliseNumber() first, so "+27838884567",
+    "27838884567" and "0838884567" all match the same person
+   */
+    public String searchByRecipient(String recipient) {
+        String wanted = normaliseNumber(recipient);
+        
+        StringBuilder sb = new StringBuilder();
+        
+        // Sent messages: iterate sentMessages and sentRecipients together on the same index
+        for (int i = 0; i < sentMessages.length; i++) {
+                 if (normaliseNumber(sentRecipients[i]).equals(wanted)) {
+                     sb.append("[Sent]   ").append(sentMessages[i]).append("\n");
+                 }
+             }
+        
+        //stored messages: iterate storedMessages and storedRecipients together on the same index
+        for (int i = 0; i < storedMessages.length; i++) {
+            if (normaliseNumber(storedRecipients[i]).equals(wanted)) {
+                sb.append("[Stored] ").append(storedMessages[i]).append("\n");
+            }
+        }
+
+        if (sb.length() == 0) {
+            return "No messages for " + recipient;
+        }
+        // trim() drops the trailing newline from the last append()
+        return sb.toString().trim();
+    }
+        /*
+    The same physical number can be written three ways:
+        +27838884567   (international with plus)
+         27838884567   (international without plus)
+         0838884567    (local replacing +27 with a leading 0)
+      All three normalise to "27838884567"
+    */
+        public static String normaliseNumber(String n) {
+        if (n == null) return "";
+        String digits = n.replaceAll("[^0-9]", "");
+        if (digits.startsWith("27")) return digits;
+        if (digits.startsWith("0"))  return "27" + digits.substring(1);
+        return digits;
+    }
+        
    //getters for the arrays
    public String[] getSentMessages()        { return sentMessages;        }
     public String[] getSentRecipients()      { return sentRecipients;      }

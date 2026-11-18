@@ -104,6 +104,7 @@ public class MainChatApp {
              System.out.println("1. Send messages");
              System.out.println("2. Show recently sent messages (Coming Soon.)");
              System.out.println("3. Quit");
+             System.out.println("4. Stored Messages");
              System.out.println("");
              System.out.println("Choose an option:");
              
@@ -154,6 +155,7 @@ public class MainChatApp {
                                 System.out.println("1. Send message");
                                 System.out.println("2. Disregard message");
                                 System.out.println("3. Store message");
+                                System.out.println("4. Stored Messages");
                                 System.out.println("Your choice: ");
                                 int sendChoice = Integer.parseInt(obj.nextLine());
                                 

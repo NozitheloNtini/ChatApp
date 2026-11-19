@@ -35,62 +35,78 @@ public class MainChatApp {
         System.out.println("What is your last name?");
         String lastName = obj.nextLine();
         
-        //validate username
+       
+        //validate username (loops until correct)
         System.out.println("Choose a username (must contain '_', max 5 characters):");
         String username = obj.nextLine();
-        
-        if (!validation.checkUserName(username)) {
+
+        while (!validation.checkUserName(username)) {
             System.out.println("Username is not correctly formatted; please ensure that your username "
                     + "contains an underscore and is no more than five characters in length.");
-        return; //exits program if username is wrong
+            System.out.println("Choose a username (must contain '_', max 5 characters):");
+            username = obj.nextLine();
         
         } System.out.println("Username successfully captured.");
           System.out.println();
 
-        //validate password
+          
+        //validate password (loops until correct)
         System.out.println("Choose a password (min 8 chars, 1 capital, 1 number, 1 special char):");
         String password = obj.nextLine();
-        
-        if (!validation.checkPasswordComplexity(password)){
+
+        while (!validation.checkPasswordComplexity(password)) {
             System.out.println("Password is not correctly formatted; please ensure that the password "
                     + "contains at least eight characters, a capital letter, a number and a special character.");
-        return;
+            System.out.println("Choose a password (min 8 chars, 1 capital, 1 number, 1 special char):");
+            password = obj.nextLine();
+        
         } System.out.println("Password successfully captured.");
           System.out.println();
 
-        //validate phone number
+        //validate phone number (loops until correct)
         System.out.println("Enter cell number (with international code, e.g. +27838968976):");
         String phoneNumber = obj.nextLine();
-        
-        if (!validation.checkPhoneNumber(phoneNumber)){
-            System.out.println("Cell phone number incorrectly formatted or does not contain international code."); 
-        return;
+
+        while (!validation.checkPhoneNumber(phoneNumber)) {
+            System.out.println("Cell phone number incorrectly formatted or does not contain international code.");
+            System.out.println("Enter cell number (with international code, e.g. +27838968976):");
+            phoneNumber = obj.nextLine();
         }System.out.println("Cell phone number successfully added."); 
 
      //calling registration method
         LoginClass login = new LoginClass(username, password, phoneNumber, firstName, lastName);
         System.out.println(login.registerUser());
    
-     //user login menu
+     ///user login menu (loops until login succeeds or attempts run out)
         System.out.println("");
         System.out.println("---Login to continue---");
-        
-        System.out.println("Enter your username:");
-        String loginUsername =  obj.nextLine();
-        
-        System.out.println("Enter your password:");
-        String loginPassword =  obj.nextLine();
-    
-        isLoggedIn = login.loginUser(loginUsername, loginPassword);
-        
+
+        int attempts = 0;
+        while (!isLoggedIn && attempts < 3) {
+            System.out.println("Enter your username:");
+            String loginUsername = obj.nextLine();
+
+            System.out.println("Enter your password:");
+            String loginPassword = obj.nextLine();
+
+            isLoggedIn = login.loginUser(loginUsername, loginPassword);
+
+            if (!isLoggedIn) {
+                attempts++;
+                System.out.println("Login failed. Please try again.\n");
+            }
+        }
+
+        //stop the app if login failed after max attempts
+        if (!isLoggedIn) {
+            System.out.println("Too many failed attempts. Exiting.");
+            return;
+        }
+
         System.out.println();
         System.out.println(login.returnLoginStatus(isLoggedIn)); //prints welcome message with their name and surname
         System.out.println();
-        
-    
-    if (!isLoggedIn) {
-        return; //stop the app if login failed
-    }
+
         System.out.println("---Welcome to QuickChat!---"); //print only if logged in successfully
         
         //asking how many messages the user wants to enter
